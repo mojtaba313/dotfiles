@@ -1,0 +1,5 @@
+alias stow-hypr='cd ~/dotfiles && stow hypr'
+alias stow-all='cd ~/dotfiles && stow */'
+alias dot='cd ~/dotfiles'
+alias s='source ~/.bashrc'
+alias hreload='hyprctl reload'

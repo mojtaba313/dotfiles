@@ -1,0 +1,30 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    color: #888888;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#tray {
+    padding: 0 10px;
+}
+
+#clock {
+    padding: 0 10px;
+}
