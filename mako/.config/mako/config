@@ -1,0 +1,39 @@
+# ============================================
+# mako — Abyss Cyan notifications
+# SUPER+N to dismiss (see keybinds.lua)
+# ============================================
+
+font=JetBrainsMono Nerd Font Mono 11
+background-color=#0b1219F2
+text-color=#d9e8f2
+border-color=#00e5ff
+border-size=2
+border-radius=12
+padding=12
+margin=12
+width=360
+height=180
+max-icon-size=48
+default-timeout=5000
+ignore-timeout=0
+layer=top
+anchor=top-right
+outer-margin=18
+progress-color=over #00e5ff
+icons=1
+max-visible=4
+sort=-time
+
+[urgency=low]
+border-color=#5d7488
+default-timeout=4000
+
+[urgency=normal]
+border-color=#00e5ff
+default-timeout=5000
+
+[urgency=critical]
+border-color=#ff6b81
+background-color=#1a0f14F2
+text-color=#f2f9ff
+default-timeout=0

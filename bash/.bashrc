@@ -3,3 +3,11 @@ if [ -e ~/.bashrc.d/_import.sh ]; then
 else
 	echo "bashrc.d not found, skipping..."
 fi
+
+# pnpm
+export PNPM_HOME="/home/mojtaba/.local/share/pnpm:/home/mojtaba/.local/share/pnpm/bin"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

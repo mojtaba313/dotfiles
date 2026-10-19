@@ -1,28 +1,30 @@
 -- ============================================
--- Look and Feel - ظاهر و انیمیشن
+-- Look and Feel — Abyss Cyan
+-- deep bg #060b11 / cyan #00e5ff / teal #2dd4bf
+-- calm for night shifts, punchy when focused
 -- ============================================
 
 hl.config({
     general = {
-        gaps_in     = 5,
-        gaps_out    = 10,
+        gaps_in     = 6,
+        gaps_out    = 12,
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgba(00e5ffee)", "rgba(2dd4bfee)"}, angle = 45 },
+            inactive_border = "rgba(1a2a3aaa)",
         },
 
-        resize_on_border = false,
+        resize_on_border = true,
         allow_tearing    = false,
         layout           = "dwindle",
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 14,
         rounding_power = 2,
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.96,
 
         shadow = {
             enabled      = true,
@@ -33,8 +35,8 @@ hl.config({
 
         blur = {
             enabled  = true,
-            size     = 3,
-            passes   = 1,
+            size     = 8,
+            passes   = 2,
             vibrancy = 0.1696,
         },
     },
@@ -44,7 +46,7 @@ hl.config({
     },
 })
 
--- انیمیشن‌ها
+-- Curves
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1} } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1} } })
 hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1} } })
@@ -70,15 +72,15 @@ hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
--- چیدمان‌ها
+-- Layouts
 hl.config({ dwindle   = { preserve_split = true } })
 hl.config({ master    = { new_status = "master" } })
 hl.config({ scrolling = { fullscreen_on_one_column = true } })
 
--- متفرقه
+-- Misc
 hl.config({
     misc = {
         force_default_wallpaper = -1,
-        disable_hyprland_logo   = true,  -- لوگوی Hyprland رو غیرفعال کن
+        disable_hyprland_logo   = true,
     },
 })

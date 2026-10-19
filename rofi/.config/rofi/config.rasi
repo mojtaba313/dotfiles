@@ -1,0 +1,16 @@
+//@theme "abyss-cyan"
+
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    drun-display-format: "{name}";
+    disable-history: false;
+    sidebar-mode: false;
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+    scroll-method: 0;
+}
+
+@theme "/usr/share/rofi/themes/solarized.rasi"

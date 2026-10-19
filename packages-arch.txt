@@ -1,0 +1,70 @@
+# Abyss Cyan — Arch packages
+# install: sudo pacman -S --needed - < packages-arch.txt
+# AUR (yay): yay -S --needed - < packages-aur.txt  (see below)
+
+# --- core wayland / hypr ---
+hyprland
+hyprpaper
+hyprlock
+hypridle
+hyprpicker
+waybar
+mako
+libnotify
+rofi
+xdg-desktop-portal-hyprland
+polkit-gnome
+qt5-wayland
+qt6-wayland
+
+# --- terminal / shell ---
+kitty
+starship
+bash-completion
+eza
+bat
+jq
+fzf
+ripgrep
+fd
+zoxide
+htop
+fastfetch
+
+# --- audio / network / bluetooth ---
+pipewire
+pipewire-pulse
+wireplumber
+pavucontrol
+brightnessctl
+playerctl
+network-manager-applet
+blueman
+bluez
+bluez-utils
+
+# --- screenshots / clipboard ---
+grim
+slurp
+wl-clipboard
+cliphist
+swappy
+
+# --- fonts ---
+ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
+noto-fonts
+noto-fonts-emoji
+inter-font
+
+# --- dev ---
+git
+neovim
+docker
+docker-compose
+nodejs
+python
+python-pip
+
+# --- applets / eyes ---
+gammastep

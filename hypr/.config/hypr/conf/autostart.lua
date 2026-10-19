@@ -1,36 +1,55 @@
 -- ============================================
--- Autostart - اجرای خودکار
+-- Autostart
+-- mako is used (installed). dunst line removed.
+-- This block re-runs on `hyprctl reload`, so every
+-- daemon is guarded against duplicate spawning.
 -- ============================================
 
+local function is_running(pgrep_args)
+    local ok, handle = pcall(io.popen, "pgrep " .. pgrep_args .. " 2>/dev/null")
+    if not ok or not handle then return false end
+    local out = handle:read("*a") or ""
+    handle:close()
+    return out:match("%S") ~= nil
+end
+
+-- start cmd only if nothing matches this pgrep pattern
+local function once(pgrep_args, cmd)
+    if is_running(pgrep_args) then return end
+    hl.exec_cmd(cmd)
+end
+
 hl.on("hyprland.start", function()
-    -- نوار وضعیت
-    hl.exec_cmd("waybar")
+    -- bar + wallpaper + notifications
+    once("-x waybar", "waybar")
+    once("-x hyprpaper", "hyprpaper")
+    once("-x mako", "mako")
 
-    -- والپیپر
-    hl.exec_cmd("hyprpaper")
+    -- workspace watcher: one poller feeding all five bar buttons, so the bar
+    -- doesn't spawn 5 hyprctl+jq pairs every second
+    once("waybar/scripts/wswatch.sh", "~/.config/waybar/scripts/wswatch.sh")
 
-    -- نوتیفیکیشن
-    hl.exec_cmd("dunst")
+    -- clipboard history: clipwatch supervises `wl-paste --watch cliphist store`
+    -- and restarts it if it dies (see the script for why --type is banned)
+    once("scripts/clipwatch.sh", "~/.config/hypr/scripts/clipwatch.sh")
 
-    -- کلیپ‌بورد
-    hl.exec_cmd("wl-paste --type text --watch cliphist store")
-    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+    -- applets
+    once("-x nm-applet", "nm-applet --indicator")
+    once("-x blueman-applet", "blueman-applet")
 
-    -- Network applet
-    hl.exec_cmd("nm-applet --indicator")
+    -- auth agent for password dialogs
+    once("-f polkit-gnome-authentication-agent-1",
+         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 
-    -- Bluetooth applet
-    hl.exec_cmd("blueman-applet")
+    -- idle / lock daemon
+    once("-x hypridle", "hypridle")
 
-    -- Policykit (برای دیالوگ‌های رمز)
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    -- warm-light daemon (starts off; toggle with SUPER+SHIFT+N)
+    -- hl.exec_cmd("gammastep -O 3500")
 
-    -- Idle daemon (قفل خودکار صفحه)
-    hl.exec_cmd("hypridle")
-
-    -- اگه از KDE Connect استفاده می‌کنی
+    -- kde connect (optional)
     -- hl.exec_cmd("kdeconnect-indicator")
 
-    -- اگه از برنامه خاصی استفاده می‌کنی، اینجا اضافه کن
-    -- hl.exec_cmd("firefox")
+    -- screenshots dir
+    hl.exec_cmd("mkdir -p ~/Pictures/Screenshots")
 end)

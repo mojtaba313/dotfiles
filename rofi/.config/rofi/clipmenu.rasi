@@ -1,0 +1,18 @@
+/* ============================================
+   Rofi — clipboard menu (imports the Abyss theme)
+   more lines + clipboard placeholder
+   ============================================ */
+
+@import "abyss-cyan"
+
+listview {
+    lines: 14;
+}
+
+entry {
+    placeholder: "󰐑  search clipboard…";
+}
+
+window {
+    width: 720px;
+}

@@ -1,17 +1,180 @@
 {
-    "layer": "top",
-    "position": "bottom",
-    "height": 30,
-    "spacing": 4,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "clock"],
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
-    "clock": {
-        "format": "{:%H:%M}",
-        "tooltip-format": "{:%Y-%m-%d %H:%M}"
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 6,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+  "modules-left": [
+    "custom/ws1",
+    "custom/ws2",
+    "custom/ws3",
+    "custom/ws4",
+    "custom/ws5"
+  ],
+  "modules-center": [
+    "clock",
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "network",
+    "pulseaudio",
+    "custom/backlight",
+    "tray"
+  ],
+  "custom/ws1": {
+    "exec": "~/.config/waybar/scripts/wsbtn.sh 1",
+    "return-type": "json",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/scripts/wsbtn.sh 1 go",
+    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
+    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+    "tooltip": false
+  },
+  "custom/ws2": {
+    "exec": "~/.config/waybar/scripts/wsbtn.sh 2",
+    "return-type": "json",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/scripts/wsbtn.sh 2 go",
+    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
+    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+    "tooltip": false
+  },
+  "custom/ws3": {
+    "exec": "~/.config/waybar/scripts/wsbtn.sh 3",
+    "return-type": "json",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/scripts/wsbtn.sh 3 go",
+    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
+    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+    "tooltip": false
+  },
+  "custom/ws4": {
+    "exec": "~/.config/waybar/scripts/wsbtn.sh 4",
+    "return-type": "json",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/scripts/wsbtn.sh 4 go",
+    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
+    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+    "tooltip": false
+  },
+  "custom/ws5": {
+    "exec": "~/.config/waybar/scripts/wsbtn.sh 5",
+    "return-type": "json",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/scripts/wsbtn.sh 5 go",
+    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
+    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+    "tooltip": false
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 48,
+    "separate-outputs": true,
+    "rewrite": {
+      "": "󰇄  Abyss"
     }
+  },
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "  {:%a %d %b}",
+    "tooltip-format": "<big>{calendar}</big>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "right",
+      "format": {
+        "months": "<span color='#00e5ff'><b>{}</b></span>",
+        "days": "<span color='#d9e8f2'><b>{}</b></span>",
+        "weeks": "<span color='#5d7488'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc57'><b>{}</b></span>",
+        "todays": "<span color='#060b11' background='#00e5ff'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down"
+    }
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "interval": 2,
+    "on-click": "kitty -e htop"
+  },
+  "memory": {
+    "format": "󰍛 {percentage}%",
+    "tooltip-format": "RAM {used:0.1f}G / {total:0.1f}G\nSWAP {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+    "interval": 5,
+    "on-click": "kitty -e htop"
+  },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "CPU {temperatureC}°C"
+  },
+  "network": {
+    "format-wifi": "\uf1eb {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰈀 {ifname}",
+    "format-disconnected": "󰤭",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "on-click": "kitty -e nmtui"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": "󰝟 muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5
+  },
+  "custom/backlight": {
+    "exec": "~/.config/waybar/scripts/backlight.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true,
+    "on-click": "~/.config/waybar/scripts/backlight.sh toggle",
+    "on-scroll-up": "~/.config/waybar/scripts/backlight.sh up",
+    "on-scroll-down": "~/.config/waybar/scripts/backlight.sh down",
+    "scroll-step": 5
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
 }

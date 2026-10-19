@@ -1,0 +1,30 @@
+[user]
+	name = mojtaba
+	email = mojtaba.ganbari9085@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[push]
+	autoSetupRemote = true
+[core]
+	editor = nvim
+	autocrlf = input
+[alias]
+	s = status -sb
+	co = checkout
+	sw = switch
+	br = branch -vv
+	lg = log --oneline --graph --decorate -15
+	d = diff
+	ds = diff --staged
+	cm = commit -m
+	aa = add -A
+	undo = reset --soft HEAD~1
+	stash-all = stash -u -m
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = plain
+[help]
+	autocorrect = 1

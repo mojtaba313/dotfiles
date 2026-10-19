@@ -1,0 +1,152 @@
+# ============================================
+# Starship — Abyss Cyan
+# fast, minimal, dev-aware: node/bun/docker/git/k8s/python
+# ============================================
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[╭─](fg:#00e5ff)[ $os ](bg:#00e5ff fg:#060b11)[](fg:#00e5ff bg:#111b26)\
+$directory[](fg:#111b26 bg:#1a2a3a)\
+$git_branch$git_status[](fg:#1a2a3a bg:#0b1219)\
+$nodejs$bun$docker$python$rust$golang$php\
+$fill\
+$cmd_duration$time\
+[](fg:#111b26)$memory\
+\n[╰─](fg:#00e5ff)$character"""
+
+palette = "abyss_cyan"
+
+[palettes.abyss_cyan]
+bg-deep = "#060b11"
+bg = "#0b1219"
+surface = "#111b26"
+overlay = "#1a2a3a"
+fg = "#d9e8f2"
+muted = "#5d7488"
+cyan = "#00e5ff"
+teal = "#2dd4bf"
+blue = "#5aa9ff"
+green = "#3dd68c"
+yellow = "#ffcc57"
+red = "#ff6b81"
+violet = "#a78bfa"
+
+[os]
+format = "[ $symbol ]($style)"
+style = "bg:#00e5ff fg:#060b11"
+disabled = false
+[os.symbols]
+Arch = "󰣇"
+Artix = "󰣇"
+Linux = "󰌽"
+Ubuntu = "󰕈"
+Fedora = "󰣛"
+Debian = "󰣚"
+Windows = "󰍲"
+Macos = "󰀵"
+Mint = "󰣭"
+Manjaro = ""
+EndeavourOS = ""
+Pop = ""
+
+[directory]
+style = "fg:#060b11 bg:#00e5ff"
+# keep prompt short for deep web projects
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " 󰌾"
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Projects" = "󰲋 "
+"code" = "󰨞 "
+
+[git_branch]
+symbol = " "
+style = "bg:#1a2a3a"
+format = '[[ $symbol $branch ](fg:#00e5ff bg:#1a2a3a)]($style)'
+truncation_length = 24
+
+[git_status]
+style = "bg:#1a2a3a"
+format = '[[($all_status$ahead_behind )](fg:#8aa2b5 bg:#1a2a3a)]($style)'
+stashed = "󰆓 "
+modified = "● "
+staged = "✚ "
+renamed = "➜ "
+deleted = "✖ "
+untracked = "◌ "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+
+[nodejs]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#3dd68c bg:#0b1219)]($style)'
+
+[bun]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#ffcc57 bg:#0b1219)]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol $context ](fg:#5aa9ff bg:#0b1219)]($style)'
+only_with_files = true
+
+[python]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#ffcc57 bg:#0b1219)]($style)'
+
+[rust]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#ff8e9e bg:#0b1219)]($style)'
+
+[golang]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#00e5ff bg:#0b1219)]($style)'
+
+[php]
+symbol = " "
+style = "bg:#0b1219"
+format = '[[ $symbol ($version) ](fg:#a78bfa bg:#0b1219)]($style)'
+
+[package]
+symbol = "󰏗 "
+style = "bg:#0b1219"
+format = '[[ $symbol $version ](fg:#5d7488 bg:#0b1219)]($style)'
+
+[cmd_duration]
+min_time = 2000
+format = "took [$duration](fg:#ffcc57) "
+show_milliseconds = false
+
+[memory_usage]
+disabled = false
+threshold = 75
+symbol = "󰍛 "
+style = "fg:#8aa2b5 bg:#111b26"
+format = "[ $symbol ${ram}( | ${swap}) ]($style) "
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#0b1219"
+format = '[[  $time ](fg:#5d7488 bg:#0b1219)]($style)'
+use_12hr = false
+
+[fill]
+symbol = " "
+
+[character]
+success_symbol = "[➜](bold fg:#00e5ff)"
+error_symbol = "[✗](bold fg:#ff6b81)"
+vicmd_symbol = "[❮](bold fg:#3dd68c)"

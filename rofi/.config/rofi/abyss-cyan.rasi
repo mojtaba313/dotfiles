@@ -1,0 +1,96 @@
+/* ============================================
+   Rofi — Abyss Cyan
+   rounded glass drun + power menu
+   ============================================ */
+
+* {
+    bg:       #050a11fa;
+    bg-alt:   #101923ff;
+    fg:       #d9e8f2;
+    muted:    #5d7488;
+    cyan:     #00e5ff;
+    teal:     #2dd4bf;
+    red:      #ff6b81;
+    yellow:   #ffcc57;
+    green:    #3dd68c;
+
+    font: "JetBrainsMono Nerd Font Mono 12";
+    border-radius: 14;
+}
+
+window {
+    background-color: @bg;
+    border: 1px;
+    border-color: @cyan;
+    border-radius: @border-radius;
+    width: 640px;
+    padding: 16px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 12px;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius: 10px;
+    padding: 8px 12px;
+    children: [ prompt, entry ];
+    spacing: 8px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @cyan;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+    placeholder: "  search apps…";
+    placeholder-color: @muted;
+}
+
+listview {
+    background-color: transparent;
+    lines: 9;
+    columns: 1;
+    spacing: 4px;
+    scrollbar: false;
+    dynamic: true;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @cyan;
+    text-color: #050a11;
+    border-radius: 10px;
+}
+
+element-icon {
+    size: 26px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}

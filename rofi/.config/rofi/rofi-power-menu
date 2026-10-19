@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# rofi power menu — Abyss Cyan
+# used as: rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu
+set -euo pipefail
+
+if [[ "${1:-}" == "" ]]; then
+  printf "󰌾  Lock\n󰒲  Suspend\n󰍃  Logout\n󰜉  Reboot\n󰐥  Poweroff\n"
+  exit 0
+fi
+
+case "${1,,}" in
+  *lock*) hyprlock & ;;
+  *suspend*) systemctl suspend ;;
+  *logout*) hyprctl dispatch exit ;;
+  *reboot*) systemctl reboot ;;
+  *poweroff*|*shutdown*) systemctl poweroff ;;
+esac

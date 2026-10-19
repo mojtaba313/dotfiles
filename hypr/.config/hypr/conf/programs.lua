@@ -1,10 +1,17 @@
 -- ============================================
--- Programs - متغیرهای برنامه‌ها
+-- Programs — single source of truth
+-- swap any of these, keybinds follow automatically
 -- ============================================
 
--- این‌ها رو یه جا تعریف می‌کنیم تا اگه خواستیم عوض کنیم، فقط اینجا رو تغییر بدیم
 terminal    = "kitty"
 fileManager = "dolphin"
-menu        = "rofi -show drun"
+menu        = "rofi -show drun -theme ~/.config/rofi/abyss-cyan.rasi"
 browser     = "firefox"
 editor      = "code"
+-- editor fallback for terminal: nvim
+termEditor  = "kitty -e nvim"
+lockCmd     = "hyprlock"
+logoutMenu  = "rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme ~/.config/rofi/abyss-cyan.rasi"
+clipmenu    = "~/.config/hypr/scripts/clipmenu.sh"
+clipmenuPin = "~/.config/hypr/scripts/clipmenu.sh --pinned"
+screenshotDir = "~/Pictures/Screenshots"
