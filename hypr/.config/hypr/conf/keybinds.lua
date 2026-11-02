@@ -27,6 +27,9 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({
 hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + TAB", hl.dsp.group.next())
 
+-- --- hyprworm window switcher (fuzzel GUI) ---
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("hyprworm"))
+
 -- --- bar visibility (state-aware, always tells you what it did) ---
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.config/hypr/scripts/barctl.sh toggle"))
 -- safety net: if the bar ever goes missing, this always brings it back
@@ -226,8 +229,11 @@ hl.bind(mainMod .. " + Print",
     hl.dsp.exec_cmd("mkdir -p " .. screenshotDir .. " && grim -g \"$(slurp)\" " .. screenshotDir ..
                         "/$(date +%Y%m%d-%H%M%S).png && notify-send 'Screenshot' 'Saved to ~/Pictures/Screenshots'"))
 
+-- --- quick notes: minimal nvim in a titled kitty ---
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notesToggle))
+
 -- --- notifications: dismiss (mako/swaync) ---
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss || swaync-client -cp || true"))
+hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd("makoctl dismiss || swaync-client -cp || true"))
 
 -- --- night-shift eye care: toggle warm tint via gammastep ---
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(

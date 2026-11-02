@@ -22,9 +22,10 @@ Font: **JetBrainsMono Nerd Font Mono** everywhere (bar, terminal, lock, rofi).
 bash/      → ~/.bashrc + ~/.bashrc.d/ (modular: base, dev, network, focus…)
 hypr/      → ~/.config/hypr/ (lua modules + paper/lock/idle + scripts/)
 kitty/     → ~/.config/kitty/ (Abyss Cyan theme, tabs bottom, 0.88 blur bg)
-waybar/    → ~/.config/waybar/ (glass bar + wsbtn/eyecare/focus scripts)
+waybar/    → ~/.config/waybar/ (glass bar + backlight helper)
 starship/  → ~/.config/starship.toml (cyan powerline prompt)
 mako/      → ~/.config/mako/ (notifications)
+nvim/      → ~/.config/nvim/ (minimal.vim for quick notes)
 rofi/      → ~/.config/rofi/ (abyss-cyan theme, clipmenu, power menu)
 git/       → ~/.gitconfig (fill in name/email)
 wallpapers/→ generated abyss-cyan.jpg + vertical (see wallpapers/generate.sh)
@@ -53,6 +54,7 @@ and reloads hypr/waybar/mako.
 | `SUPER+E` / `B` / `O` | dolphin / firefox / vscode |
 | `SUPER+M` / `J` | dolphin in `$MEDICAL_DIR` / `$PROJECTS_DIR` |
 | `SUPER+W` / `V` / `F` / `T` / `G` | close / float / fullscreen / tilesplit / group |
+| `SUPER+I` | **hyprworm** window switcher (fuzzel GUI, all workspaces) |
 | `SUPER+HJKL` + arrows | focus |
 | `SUPER+SHIFT+HJKL` / arrows | move window |
 | `SUPER+1…0` / `SHIFT` / `CTRL` | workspace / move / move-silent |
@@ -65,12 +67,40 @@ and reloads hypr/waybar/mako.
 | `SUPER+SHIFT+Q` | power menu |
 | `SUPER+SHIFT+E` | exit Hyprland |
 | `SUPER+SHIFT+R` | reload config |
-| `SUPER+N` | dismiss notification |
+| `SUPER+N` | show/hide pinned notes pad (`~/notes.txt` in minimal nvim, all workspaces) |
+| `SUPER+CTRL+N` | dismiss notification |
 | `SUPER+SHIFT+N` | night-shift warm tint (gammastep 3500K) |
 | `Print` / `SHIFT+Print` / `SUPER+Print` | region→clipboard / full→clipboard / region→file |
 
 > `SUPER+L` moves focus right (vim-style), so lock lives on `ESC`.
 > Togglesplit is `SUPER+T`; `SUPER+J` opens your projects folder.
+
+## hyprworm — Window Switcher
+
+`SUPER+I` opens **hyprworm**, a fuzzel-based window switcher that shows all
+open windows across workspaces in a single overlay. Select a window to focus
+it (and switch to its workspace automatically).
+
+| key | action |
+| --- | ------ |
+| `SUPER+I` | open hyprworm (toggle) |
+| Type to filter | fuzzel fuzzy matching |
+| `Enter` | focus selected window |
+| `Esc` | close without switching |
+
+Config: `~/.config/hyprworm/config`
+
+```ini
+launcher = fuzzel --dmenu --width 62 --y 4
+show_title = true
+sort_order = workspace
+special_workspace_position = top
+workspace_alias_special = "⭐ "
+workspace_alias_work = "💼 "
+workspace_alias_gaming = "🎮 "
+```
+
+Special workspaces (scratchpad) get a ⭐ prefix and sort to the top.
 
 ## Clipboard with pins
 
@@ -133,51 +163,33 @@ exist if you want them: `focus 25` (terminal pomodoro), `eyes` (20s break),
 `hydrate 250`, `note …`, `med-note`, `standup`. Say the word and I'll strip
 those too.
 
-### Why the workspaces are custom modules
+### Why the workspaces use `ext/workspaces`
 
-Waybar's built-in `hyprland/workspaces` **cannot switch workspaces** on
-Hyprland 0.55+ (this machine runs 0.56). Hyprland replaced the request socket's
-protocol with **Hyprwire**; waybar 0.15 still speaks the old JSON, so its
-`activate` action is silently rejected. Events still arrive over the plain-text
-`socket2`, so the buttons *render*, the highlight *keeps updating*, hover works —
-and clicking does nothing at all. It looks alive but dead.
+Waybar's `hyprland/workspaces` module cannot switch workspaces on Hyprland
+0.55+ (this machine runs 0.56): Hyprland replaced its request socket with
+**Hyprwire**, which waybar 0.15 does not speak, so its `activate` action is
+silently rejected. The same Hyprland build also implements the standard
+`ext-workspace-v1` protocol, and waybar 0.15 ships an `ext/workspaces` module
+that speaks it.
 
-So the bar uses `custom/ws1…ws5` instead, driven by `scripts/wsbtn.sh`:
+So the bar uses `ext/workspaces` directly:
+
+- one module, driven entirely by compositor events — no daemon, no polling,
+  no `hyprctl`/`jq` forks per button;
+- clicking a button sends the protocol's `activate` request, so switching
+  workspaces works without Hyprland's broken request socket;
+- `workspace_rule` keeps 1–5 persistent, so five buttons are always present;
+  any other workspace appears automatically when you use it;
+- scroll-to-switch is `SUPER` + wheel (global keybind), not on the bar itself.
 
 | key | alias | action |
 | --- | --- | --- |
-| click `1`–`5` | — | switch workspace (via `hyprctl`) |
-| scroll on any | — | next / previous workspace |
+| click `1`–`5` | — | switch workspace |
+| `SUPER` + wheel | — | next / previous workspace |
 | `SUPER+Z` | `wtoggle` | toggle bar, always notifies you which state it ended in |
 | `SUPER+SHIFT+B` | `wshow` | force the bar back (restarts waybar) |
 | `SUPER+SHIFT+Z` | `whide` | hide bar + fullscreen |
 | — | `bar status` | prints `visible` / `hidden` |
-
-Note for 0.55+: `hyprctl dispatch` arguments are parsed as **Lua**, and
-`hyprctl dispatch` already implies `hl.dispatch()`, so pass the dispatcher
-directly: `hyprctl dispatch 'hl.dsp.focus({ workspace = 3 })'`. Wrapping it again
-in `hl.dispatch(...)` fails with `expected a dispatcher` and the click does
-nothing at all.
-
-### Why there is a watcher daemon
-
-Each button used to run `hyprctl -j activeworkspace | jq` once a second — five
-subprocesses plus five `jq` spawns every second, just to decide which button is
-highlighted. That was heavy enough to make the bar feel laggy.
-
-`scripts/wswatch.sh` (started from Hyprland's autostart) now listens on
-Hyprland's `socket2` event stream via `socat` and writes `"<workspace> <epoch>"`
-to `$XDG_RUNTIME_DIR/waybar-ws/active`. The buttons read that file with pure bash
-builtins (no forks in the hot path), and `wswatch.sh` pokes waybar with
-`SIGRTMIN+8` on every `workspace`/`focusedmon` event — the `custom/ws*` modules
-subscribe to it with `"signal": 8`, so a switch (keyboard or click) repaints in
-tens of milliseconds instead of waiting for a poll.
-
-A 10s idle heartbeat keeps the state file fresh; if the watcher dies, `wsbtn.sh`
-notices the stale timestamp and falls back to `hyprctl`. If `socat` or the event
-socket is unavailable, `wswatch.sh` degrades to a 1s poll.
-
-Net effect: waybar's CPU went from ~55–90% (an `interval: 0` re-exec spin) to ~1%.
 
 ### Look
 

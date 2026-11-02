@@ -39,41 +39,36 @@ tooltip label {
     padding: 4px;
 }
 
-/* ---------- workspace chips ---------- */
-#custom-ws1,
-#custom-ws2,
-#custom-ws3,
-#custom-ws4,
-#custom-ws5 {
-    background: rgba(255, 255, 255, 0.035);
-    color: @muted;
+/* ---------- workspaces: flat labels, one soft highlight ---------- */
+#workspaces {
     margin: 4px 2px;
-    padding: 0 12px;
+    padding: 0 2px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: @muted;
+    margin: 0 1px;
+    padding: 0 8px;
     min-height: 26px;
-    border: 1px solid transparent;
-    border-radius: 9px;
-    transition: all 120ms ease;
+    border: none;
+    border-radius: 8px;
+    transition: color 120ms ease, background 120ms ease;
 }
 
-#custom-ws1:hover,
-#custom-ws2:hover,
-#custom-ws3:hover,
-#custom-ws4:hover,
-#custom-ws5:hover {
+#workspaces button:hover {
     color: #eafcff;
-    background: rgba(34, 230, 255, 0.10);
-    border-color: rgba(34, 230, 255, 0.22);
+    background: rgba(34, 230, 255, 0.08);
 }
 
-#custom-ws1.active,
-#custom-ws2.active,
-#custom-ws3.active,
-#custom-ws4.active,
-#custom-ws5.active {
-    color: #04121a;
-    background: linear-gradient(135deg, @accent 0%, @accent2 100%);
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 0 12px rgba(34, 230, 255, 0.35);
+#workspaces button.active {
+    color: @accent;
+    background: rgba(34, 230, 255, 0.12);
+}
+
+#workspaces button.urgent {
+    color: @danger;
+    background: rgba(255, 107, 129, 0.12);
 }
 
 /* ---------- window title ---------- */

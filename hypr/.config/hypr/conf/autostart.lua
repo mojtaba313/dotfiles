@@ -25,9 +25,7 @@ hl.on("hyprland.start", function()
     once("-x hyprpaper", "hyprpaper")
     once("-x mako", "mako")
 
-    -- workspace watcher: one poller feeding all five bar buttons, so the bar
-    -- doesn't spawn 5 hyprctl+jq pairs every second
-    once("waybar/scripts/wswatch.sh", "~/.config/waybar/scripts/wswatch.sh")
+    once("systemctl --user start hyprpolkitagent")
 
     -- clipboard history: clipwatch supervises `wl-paste --watch cliphist store`
     -- and restarts it if it dies (see the script for why --type is banned)

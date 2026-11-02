@@ -67,3 +67,15 @@ hl.window_rule({
     match = { title = "^(rofi|Rofi).*" },
     float = true,
 })
+
+-- quick notes pad (SUPER+N): floating window on the current workspace
+hl.window_rule({
+    name  = "notes-pad",
+    match = { class = "^(notepad)$" },
+    float = true,
+    pin = true,
+    size  = { "monitor_w*0.3", "monitor_h*0.4" },
+    move  = { "monitor_w*0.68", "monitor_h*0.05" },
+    border_size = 0,
+    no_anim = true,
+})

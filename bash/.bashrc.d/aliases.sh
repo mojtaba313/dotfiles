@@ -37,5 +37,8 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 
+# --- dolphin file explorer ---
+#alias do='dolphin .'
+
 # nmcli
 alias up='nmcli connection up'

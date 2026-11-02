@@ -10,6 +10,7 @@ browser     = "firefox"
 editor      = "code"
 -- editor fallback for terminal: nvim
 termEditor  = "kitty -e nvim"
+notesToggle = "~/.config/hypr/scripts/notes.sh"
 lockCmd     = "hyprlock"
 logoutMenu  = "rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme ~/.config/rofi/abyss-cyan.rasi"
 clipmenu    = "~/.config/hypr/scripts/clipmenu.sh"

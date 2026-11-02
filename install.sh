@@ -39,4 +39,4 @@ pkill -x mako >/dev/null 2>&1 && (mako &>/dev/null & disown) || true
 makoctl reload 2>/dev/null || true
 
 say "Done. Open a new kitty tab to load starship + bash modules."
-say "Cheatsheet: SUPER+Return kitty • SUPER+R rofi • SUPER+ESC lock • SUPER+Z hide bar • SUPER+Print screenshot"
+say "Cheatsheet: SUPER+Return kitty • SUPER+R rofi • SUPER+ESC lock • SUPER+Z hide bar • SUPER+Print screenshot • SUPER+I hyprworm"

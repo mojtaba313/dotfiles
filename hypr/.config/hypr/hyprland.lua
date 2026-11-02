@@ -6,6 +6,7 @@
 require("conf.programs")
 require("conf.env")
 require("conf.monitors")
+require("conf.workspaces")
 require("conf.autostart")
 require("conf.look")
 require("conf.input")

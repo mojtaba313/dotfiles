@@ -26,6 +26,12 @@ hl.env("QT_FONT_DPI", "96")
 hl.env("GTK_THEME", "Adwaita:dark")
 hl.env("QT_STYLE_OVERRIDE", "kvantum")
 
+-- File pickers: route GTK apps through the XDG portal, and give Qt apps the
+-- KDE platform theme so they use the Dolphin/KDE file dialog.
+-- portals.conf selects the KDE backend for FileChooser.
+hl.env("GTK_USE_PORTAL", "1")
+hl.env("QT_QPA_PLATFORMTHEME", "kde")
+
 -- Work directories (also set for the shell in ~/.bashrc.d/vars.sh)
 hl.env("MEDICAL_DIR", "/home/mojtaba/Desktop/medicine")
 hl.env("PROJECTS_DIR", "/home/mojtaba/Desktop/projects")

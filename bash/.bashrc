@@ -11,3 +11,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+# kilo
+export PATH=/home/mojtaba/.kilo/bin:$PATH
+
+# mimocode
+export PATH=/home/mojtaba/.mimocode/bin:$PATH

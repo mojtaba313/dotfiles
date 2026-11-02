@@ -2,3 +2,4 @@ brave-bin
 visual-studio-code-bin
 rofi-power-menu
 papirus-icon-theme
+hyprworm

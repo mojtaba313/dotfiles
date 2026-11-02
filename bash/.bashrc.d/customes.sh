@@ -29,7 +29,7 @@ export VISUAL="$EDITOR"
 
 # --- v2RayN ---
 export PATH="$PATH:/usr/local/bin/v2rayN-linux-64"
-
+alias v2="v2rayN & disown"
 # --- vscode ---
 export PATH="$PATH:/usr/share/code/"
 

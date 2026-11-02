@@ -7,11 +7,7 @@
   "margin-left": 10,
   "margin-right": 10,
   "modules-left": [
-    "custom/ws1",
-    "custom/ws2",
-    "custom/ws3",
-    "custom/ws4",
-    "custom/ws5"
+    "ext/workspaces"
   ],
   "modules-center": [
     "clock",
@@ -26,54 +22,18 @@
     "custom/backlight",
     "tray"
   ],
-  "custom/ws1": {
-    "exec": "~/.config/waybar/scripts/wsbtn.sh 1",
-    "return-type": "json",
-    "interval": 10,
-    "signal": 8,
-    "on-click": "~/.config/waybar/scripts/wsbtn.sh 1 go",
-    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
-    "tooltip": false
-  },
-  "custom/ws2": {
-    "exec": "~/.config/waybar/scripts/wsbtn.sh 2",
-    "return-type": "json",
-    "interval": 10,
-    "signal": 8,
-    "on-click": "~/.config/waybar/scripts/wsbtn.sh 2 go",
-    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
-    "tooltip": false
-  },
-  "custom/ws3": {
-    "exec": "~/.config/waybar/scripts/wsbtn.sh 3",
-    "return-type": "json",
-    "interval": 10,
-    "signal": 8,
-    "on-click": "~/.config/waybar/scripts/wsbtn.sh 3 go",
-    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
-    "tooltip": false
-  },
-  "custom/ws4": {
-    "exec": "~/.config/waybar/scripts/wsbtn.sh 4",
-    "return-type": "json",
-    "interval": 10,
-    "signal": 8,
-    "on-click": "~/.config/waybar/scripts/wsbtn.sh 4 go",
-    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
-    "tooltip": false
-  },
-  "custom/ws5": {
-    "exec": "~/.config/waybar/scripts/wsbtn.sh 5",
-    "return-type": "json",
-    "interval": 10,
-    "signal": 8,
-    "on-click": "~/.config/waybar/scripts/wsbtn.sh 5 go",
-    "on-scroll-up": "~/.config/waybar/scripts/wsbtn.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/wsbtn.sh prev",
+  "ext/workspaces": {
+    "format": "{name} {icon}",
+    "format-icons": {
+      "1": "󰨞",
+      "2": "󰖟",
+      "3": "󰆍",
+      "4": "󰙯",
+      "5": "󰈙",
+      "default": ""
+    },
+    "sort-by-name": true,
+    "on-click": "activate",
     "tooltip": false
   },
   "hyprland/window": {

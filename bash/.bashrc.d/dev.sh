@@ -57,7 +57,10 @@ alias serve='python3 -m http.server 8000'
 
 # --- editors ---
 alias v='nvim'
-alias c='code .'
+alias vscode='code . &>/dev/null & disown'
+
+# --- copy std output to clipboard ---
+alias c='wl-copy -n'
 
 # --- vnc ---
 alias vnc='wayvnc -o LVDS-1 0.0.0.0 5900'
